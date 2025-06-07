@@ -10,8 +10,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-documents/picker": "^10.1.2",
+    "@supabase/supabase-js": "^1.13.1",
     "react": "19.0.0",
-    "react-native": "0.79.1"
+    "react-native": "0.79.1",
+    "react-native-dotenv": "^3.4.11",
+    "react-native-url-polyfill": "^2.0.0",
+    "react-native-webview": "^13.13.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
