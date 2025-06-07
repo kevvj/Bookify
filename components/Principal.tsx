@@ -6,6 +6,7 @@ import HtmlContent from '../HtmlContent.tsx'
 import { useTimeout } from '../useTimeout.tsx'
 import FilePicker from '../components/FilePicker.tsx'
 import { StyleSheet } from 'react-native'
+import Header from './Header.tsx'
 
 
 export default function TextSelector({ setNavigation }: any) {
@@ -63,6 +64,8 @@ export default function TextSelector({ setNavigation }: any) {
 
     <View style={styles.container}>
 
+      <Header Traslate ="Hola"></Header>
+
 
       <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
 
@@ -79,7 +82,7 @@ export default function TextSelector({ setNavigation }: any) {
 
       </View>
 
-      {text && <View style={{ width: '100%', flex: 0.7 }}>
+      {text && <View style={{ width: '100%', flex: 0.3 }}>
         <WebView
           ref={webviewRef}
           originWhitelist={['*']}
