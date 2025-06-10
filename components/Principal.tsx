@@ -67,7 +67,7 @@ export default function TextSelector({ setNavigation }: any) {
       <Header Traslate ="Hola"></Header>
 
 
-      <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
+      {/* <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
 
         <FilePicker
           setText={setText}
@@ -80,9 +80,9 @@ export default function TextSelector({ setNavigation }: any) {
           setHtml={setHtml}
         />
 
-      </View>
+      </View> */}
 
-      {text && <View style={{ width: '100%', flex: 0.3 }}>
+      {text && <View style={{ width: '100%', flex: 1 }}>
         <WebView
           ref={webviewRef}
           originWhitelist={['*']}

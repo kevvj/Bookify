@@ -1,4 +1,4 @@
-import { Text, View } from "react-native"
+import { Button, Text, TouchableOpacity, View } from "react-native"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
@@ -8,30 +8,47 @@ import { faHome } from "@fortawesome/free-solid-svg-icons"
 
 const Header = ({ Traslate }: any) => {
     return (
-        <View style={
-            {
-                flex: 0.1,
-                padding: 30,
-                marginTop: 40,
+        <View style={{
+            flex: 0.2,
+            padding: 30,
+            marginTop: 40,
+        }}>
+
+            <View style={{
                 flexDirection: "row",
                 gap: 20,
                 alignItems: "center",
-                justifyContent:"space-between"
-            }
-        }>
-            <Text>
-                <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
-            </Text>
-           
+                justifyContent: "space-between"
+            }}>
+                <Text>
+                    <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
+                </Text>
 
-            <Text>
-                <FontAwesomeIcon icon={faHome}></FontAwesomeIcon>
-            </Text>
 
-             
-            <Text>
-                <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>
-            </Text>
+                <Text>
+                    <FontAwesomeIcon icon={faHome}></FontAwesomeIcon>
+                </Text>
+
+
+                <Text>
+                    <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>
+                </Text>
+            </View>
+
+            <View style={{ alignSelf: "center", borderWidth: 2, borderColor: "#ccc", marginTop: 40, borderRadius: 10, width: "100%" }}>
+                <Text style={{ padding: 15 }}>Traducción: {Traslate}</Text>
+            </View>
+
+            <TouchableOpacity style={{
+                backgroundColor: 'black',
+                padding: 10,
+                borderRadius: 5,
+                width: 121,
+                alignSelf: "center",
+                marginTop:20
+            }}>
+                <Text style={{color:"white"}}>Guardar palabra</Text>
+            </TouchableOpacity>
         </View>
     )
 }

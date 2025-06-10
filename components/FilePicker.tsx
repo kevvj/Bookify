@@ -4,8 +4,6 @@ import { pick } from '@react-native-documents/picker'
 import { StyleSheet } from 'react-native'
 import supabase from '../SupaBase.tsx'
 import 'react-native-url-polyfill/auto'
-import { EMAIL, PASSWORD } from '@env'
-import { signIn } from '../hooks/SignIn.tsx'
 interface PickedFile {
   name?: string | null;
   type?: string | null;
@@ -150,13 +148,7 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
       <TouchableOpacity onPress={pickFile} style={styles.button}>
         <Text style={{ color: 'white' }}>Elije un archivo</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => addWords(selectedText)} style={styles.button}>
-        <Text style={{ color: 'white' }}>Guardar texto</Text>
-      </TouchableOpacity>
-
-      <Text>{traslateText}</Text>
-
+      <Text style= {{alignSelf:"center"}}>El formato del archivo debe de ser compatible</Text>
     </View>
   )
 
@@ -165,9 +157,12 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
 const styles = StyleSheet.create({
 
   button: {
-    backgroundColor: 'skyblue',
-    padding: 5,
+    backgroundColor: 'black',
+    padding: 10,
     borderRadius: 5,
+    width:120,
+    alignSelf:"center"
+
 
   }
 })
