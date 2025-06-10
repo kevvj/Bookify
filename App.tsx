@@ -3,7 +3,7 @@ import TextSelector from './components/Principal'
 import { useState } from 'react'
 import LogIn from './components/LogIn'
 import Welcome from './components/Welcome'
-import Registration from './components/Registation'
+import Registration from './components/Registration'
 export default function App() {
 
   const [navigation, setNavigation] = useState("Welcome")

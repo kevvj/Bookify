@@ -26,12 +26,44 @@ export default function Registration({ setNavigation }: any) {
                 </View>
 
                 <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-
                     <Text>Contraseña</Text>
                     <TextInput
                         value={password}
                         onChangeText={setPassword}
                         placeholder="Escribe tu contraseña"
+                        secureTextEntry={true}
+                        style={{ marginLeft: 20, marginRight: 10, borderWidth: 0.5, borderColor: '#000', width: 200, padding: 4 }}
+                    />
+                </View>
+
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Text>Confirmar contraseña</Text>
+                    <TextInput
+                        value={password}
+                        onChangeText={setPassword}
+                        placeholder="Confirma tu contraseña"
+                        secureTextEntry={true}
+                        style={{ marginLeft: 20, marginRight: 10, borderWidth: 0.5, borderColor: '#000', width: 200, padding: 4 }}
+                    />
+                </View>
+
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Text>Nombre completo</Text>
+                    <TextInput
+                        value={password}
+                        onChangeText={setPassword}
+                        placeholder="Escribe tu nombre"
+                        secureTextEntry={true}
+                        style={{ marginLeft: 20, marginRight: 10, borderWidth: 0.5, borderColor: '#000', width: 200, padding: 4 }}
+                    />
+                </View>
+
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Text>Telefono</Text>
+                    <TextInput
+                        value={password}
+                        onChangeText={setPassword}
+                        placeholder="Escribe tu telefono"
                         secureTextEntry={true}
                         style={{ marginLeft: 20, marginRight: 10, borderWidth: 0.5, borderColor: '#000', width: 200, padding: 4 }}
                     />
