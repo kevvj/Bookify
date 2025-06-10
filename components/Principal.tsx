@@ -64,7 +64,7 @@ export default function TextSelector({ setNavigation }: any) {
 
     <View style={styles.container}>
 
-      <Header Traslate ="Hola"></Header>
+      <Header Traslate ="Hola" setNavigation={setNavigation}></Header>
 
 
       {/* <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>

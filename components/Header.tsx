@@ -6,7 +6,7 @@ import { faGear } from "@fortawesome/free-solid-svg-icons"
 import { faHome } from "@fortawesome/free-solid-svg-icons"
 
 
-const Header = ({ Traslate }: any) => {
+const Header = ({ Traslate, setNavigation }: any) => {
     return (
         <View style={{
             flex: 0.2,
@@ -25,12 +25,12 @@ const Header = ({ Traslate }: any) => {
                 </Text>
 
 
-                <Text>
-                    <FontAwesomeIcon icon={faHome}></FontAwesomeIcon>
+                <Text onPress={() => setNavigation("Welcome")}>
+                    <FontAwesomeIcon icon={faHome} ></FontAwesomeIcon>
                 </Text>
 
 
-                <Text>
+                <Text onPress={() => setNavigation("Login")}>
                     <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>
                 </Text>
             </View>
