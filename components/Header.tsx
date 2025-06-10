@@ -1,31 +1,36 @@
 import { Text, View } from "react-native"
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
+import { faCircle } from "@fortawesome/free-solid-svg-icons"
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
+import { faGear } from "@fortawesome/free-solid-svg-icons"
+import { faHome } from "@fortawesome/free-solid-svg-icons"
 
 
 const Header = ({ Traslate }: any) => {
     return (
         <View style={
             {
-                flex: 0.2,
-                borderWidth: 1,
-                borderBlockColor: "#ccc",
+                flex: 0.1,
                 padding: 30,
                 marginTop: 40,
                 flexDirection: "row",
                 gap: 20,
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent:"space-between"
             }
         }>
             <Text>
-                {Traslate}
+                <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
             </Text>
-            
-            <Text>
-                
-            </Text>
+           
 
             <Text>
-                Iniciar sección
+                <FontAwesomeIcon icon={faHome}></FontAwesomeIcon>
+            </Text>
+
+             
+            <Text>
+                <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>
             </Text>
         </View>
     )

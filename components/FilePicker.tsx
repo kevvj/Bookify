@@ -151,24 +151,11 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
         <Text style={{ color: 'white' }}>Elije un archivo</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => setNavigation("Login")} style={styles.button}>
-        <Text style={{ color: 'white' }}>Volver a logear</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => signIn(EMAIL, PASSWORD)} style={styles.button}>
-        <Text style={{ color: 'white' }}>LogIn</Text>
-      </TouchableOpacity>
-
       <TouchableOpacity onPress={() => addWords(selectedText)} style={styles.button}>
         <Text style={{ color: 'white' }}>Guardar texto</Text>
       </TouchableOpacity>
 
-
-
       <Text>{traslateText}</Text>
-
-
-
 
     </View>
   )

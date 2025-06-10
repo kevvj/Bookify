@@ -91,12 +91,6 @@ export default function TextSelector({ setNavigation }: any) {
         />
       </View>}
 
-      {/* <View style={{ position: 'absolute', top: 0, right: 0, padding: 30 }}>
-        <Text>Texto final:{finalSelection}</Text>
-        <Text>Texto seleccionado: {selectedText}</Text>
-        <Text>Texto traducido: {translatedText}</Text>
-      </View> */}
-
 
     </View>
   )
