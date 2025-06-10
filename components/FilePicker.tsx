@@ -11,7 +11,7 @@ interface PickedFile {
   size?: number | null;
 }
 
-const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWords, words, setNavigation, setHtml }: any) => {
+const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWords, words, setNavigation, setHtml, navigation }: any) => {
   const [fileText, setFileText] = useState('a')
   const [traslateText, setTraslateText] = useState('Texto a traducir')
 
@@ -76,9 +76,11 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
     console.log(result)
     setFileText(result.texto)
     setText(result.texto)
+    console.log("tumama")
 
     if (result.texto) {
       setIsLoading(false)
+      setNavigation('Home')
     }
   }
 
@@ -144,11 +146,14 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
 
 
   return (
-    <View>
-      <TouchableOpacity onPress={pickFile} style={styles.button}>
+    <View style={{ marginTop: 70 }}>
+      <TouchableOpacity onPress={() => {
+        setNavigation('Home')
+        pickFile()
+      }} style={styles.button}>
         <Text style={{ color: 'white' }}>Elije un archivo</Text>
       </TouchableOpacity>
-      <Text style= {{alignSelf:"center"}}>El formato del archivo debe de ser compatible</Text>
+      <Text style={{ alignSelf: "center" }}>El formato del archivo debe de ser compatible</Text>
     </View>
   )
 
@@ -160,8 +165,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     padding: 10,
     borderRadius: 5,
-    width:120,
-    alignSelf:"center"
+    width: 120,
+    alignSelf: "center"
 
 
   }

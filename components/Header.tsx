@@ -9,7 +9,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons"
 const Header = ({ Traslate, setNavigation }: any) => {
     return (
         <View style={{
-            flex: 0.2,
+            flex: 0.3,
             padding: 30,
             marginTop: 40,
         }}>
@@ -20,7 +20,7 @@ const Header = ({ Traslate, setNavigation }: any) => {
                 alignItems: "center",
                 justifyContent: "space-between"
             }}>
-                <Text>
+                <Text onPress={() => setNavigation("FilePicker")}>
                     <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
                 </Text>
 

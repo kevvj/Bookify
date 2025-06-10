@@ -9,18 +9,8 @@ import { StyleSheet } from 'react-native'
 import Header from './Header.tsx'
 
 
-export default function TextSelector({ setNavigation }: any) {
-  const webviewRef = useRef(null)
+export default function TextSelector({ setNavigation, webviewRef, selectedText, setSelectedText, finalSelection, setFinalSelection, isLoading, setIsLoading, translatedText, setTranslatedText, words, setWords, html, setHtml, text, setText }: any) {
 
-  const [selectedText, setSelectedText] = useState('')
-  const [finalSelection, setFinalSelection] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [translatedText, setTranslatedText] = useState('hola')
-  const [words, setWords] = useState<string[]>([])
-
-  const [html, setHtml] = useState('<span>hola</span>')
-
-  const [text, setText] = useState('')
 
   useEffect(() => {
     console.log(words)
@@ -28,7 +18,7 @@ export default function TextSelector({ setNavigation }: any) {
 
   useEffect(() => {
     const phrases = text.split(' ')
-    const spans = phrases.map((w) => {
+    const spans = phrases.map((w: any) => {
       return `<span class = "${words.includes(w) ? "color" : ""}">${w}</span>`
     }).join('')
     setHtml(spans)
@@ -64,23 +54,7 @@ export default function TextSelector({ setNavigation }: any) {
 
     <View style={styles.container}>
 
-      <Header Traslate ="Hola" setNavigation={setNavigation}></Header>
-
-
-      {/* <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
-
-        <FilePicker
-          setText={setText}
-          setIsLoading={setIsLoading}
-          finalSelection={finalSelection}
-          selectedText={selectedText}
-          setWords={setWords}
-          words={words}
-          setNavigation={setNavigation}
-          setHtml={setHtml}
-        />
-
-      </View> */}
+      <Header Traslate="Hola" setNavigation={setNavigation}></Header>
 
       {text && <View style={{ width: '100%', flex: 1 }}>
         <WebView
