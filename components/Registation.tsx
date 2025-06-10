@@ -1,16 +1,16 @@
 import { View, Text, Button, TextInput, TouchableOpacity } from "react-native"
 import React, { useState } from "react"
 import { signIn } from '../hooks/SignIn.tsx'
-import { EMAIL, PASSWORD } from '@env'
 import { StyleSheet } from 'react-native'
 
-export default function LogIn({ setNavigation }: any) {
+export default function Registration({ setNavigation }: any) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20 }}>
-            <Text style={{ fontSize: 24, marginBottom: 20 }}>Inicio de sesión</Text>
+            <Text style={{ fontSize: 24, marginBottom: 20 }}>Registro</Text>
 
             <View style={{ gap: 10 }}>
 
@@ -41,14 +41,8 @@ export default function LogIn({ setNavigation }: any) {
 
             <View style={styles.button_container}>
 
-                <TouchableOpacity onPress={() => {
-                    signIn("kevinelrey123456@gmail.com", "bendipalteo777")
-                    setNavigation('Home')
-                }} style={styles.button}>
-                    <Text style={styles.text}>Entrar</Text>
-                </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => setNavigation('Registration')} style={styles.button} >
+                <TouchableOpacity onPress={() => setNavigation('Login')} style={styles.button} >
                     <Text style={styles.text}>Registrar</Text>
                 </TouchableOpacity>
 
@@ -69,13 +63,13 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: "white",
+        color: "white", 
         alignSelf: "center"
     },
 
-    button_container: {
-        gap: 10,
-        marginTop: 20,
-        flexDirection: "row"
+    button_container:{
+        gap:10,
+        marginTop:20,
+        flexDirection:"row"
     }
 })
