@@ -1,13 +1,14 @@
 import { View, Text, Button, TextInput, TouchableOpacity } from "react-native"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { signIn } from '../hooks/SignIn.tsx'
-import { EMAIL, PASSWORD } from '@env'
 import { StyleSheet } from 'react-native'
+import supabase from "../SupaBase.tsx"
 
 export default function LogIn({ setNavigation }: any) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20 }}>
             <Text style={{ fontSize: 24, marginBottom: 20 }}>Inicio de sesión</Text>

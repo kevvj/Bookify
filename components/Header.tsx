@@ -9,14 +9,14 @@ import { faHome } from "@fortawesome/free-solid-svg-icons"
 const Header = ({ Traslate, setNavigation }: any) => {
     return (
         <View style={{
-            flex: 0.3,
+            flex: 0.05,
             padding: 30,
             marginTop: 40,
+            
         }}>
 
             <View style={{
                 flexDirection: "row",
-                gap: 20,
                 alignItems: "center",
                 justifyContent: "space-between"
             }}>
@@ -35,20 +35,6 @@ const Header = ({ Traslate, setNavigation }: any) => {
                 </Text>
             </View>
 
-            <View style={{ alignSelf: "center", borderWidth: 2, borderColor: "#ccc", marginTop: 40, borderRadius: 10, width: "100%" }}>
-                <Text style={{ padding: 15 }}>Traducción: {Traslate}</Text>
-            </View>
-
-            <TouchableOpacity style={{
-                backgroundColor: 'black',
-                padding: 10,
-                borderRadius: 5,
-                width: 121,
-                alignSelf: "center",
-                marginTop:20
-            }}>
-                <Text style={{color:"white"}}>Guardar palabra</Text>
-            </TouchableOpacity>
         </View>
     )
 }

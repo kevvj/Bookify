@@ -4,6 +4,7 @@ import { pick } from '@react-native-documents/picker'
 import { StyleSheet } from 'react-native'
 import supabase from '../SupaBase.tsx'
 import 'react-native-url-polyfill/auto'
+import Header from './Header.tsx'
 interface PickedFile {
   name?: string | null;
   type?: string | null;
@@ -146,15 +147,18 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
 
 
   return (
-    <View style={{ marginTop: 70 }}>
-      <TouchableOpacity onPress={() => {
-        setNavigation('Home')
-        pickFile()
-      }} style={styles.button}>
-        <Text style={{ color: 'white' }}>Elije un archivo</Text>
-      </TouchableOpacity>
-      <Text style={{ alignSelf: "center" }}>El formato del archivo debe de ser compatible</Text>
-    </View>
+    <>
+    <Header setNavigation ={setNavigation}></Header>
+      <View style={{ marginTop: 70 }}>
+        <TouchableOpacity onPress={() => {
+          setNavigation('Home')
+          pickFile()
+        }} style={styles.button}>
+          <Text style={{ color: 'white' }}>Elije un archivo</Text>
+        </TouchableOpacity>
+        <Text style={{ alignSelf: "center" }}>El formato del archivo debe de ser compatible</Text>
+      </View>
+    </>
   )
 
 }

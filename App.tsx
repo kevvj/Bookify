@@ -6,6 +6,8 @@ import Welcome from './components/Welcome'
 import Registration from './components/Registration'
 import FilePicker from './components/FilePicker'
 import { useTimeout } from './useTimeout'
+import supabase from './SupaBase'
+import Files from './components/Files'
 
 export default function App() {
   const [navigation, setNavigation] = useState("Welcome")
@@ -17,6 +19,8 @@ export default function App() {
   const [words, setWords] = useState<string[]>([])
   const [html, setHtml] = useState('<span>hola</span>')
   const [text, setText] = useState('')
+
+
 
   useEffect(() => {
     console.log(words)
@@ -46,11 +50,15 @@ export default function App() {
         finalSelection={finalSelection} setFinalSelection={setFinalSelection} isLoading={isLoading} setIsLoading={setIsLoading} translatedText={translatedText} setTranslatedText={setTranslatedText} words={words} setWords={setWords} html={html} setHtml={setHtml} text={text} setText={setText}
       ></TextSelector>}
 
-      {navigation === "Registration" && <Registration setNavigation={setNavigation}></Registration>}
+      {navigation === "Registration" && 
+      
+      <Registration setNavigation={setNavigation}></Registration>}
 
       {navigation === "FilePicker" && <FilePicker
-        setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation ={navigation}
+        setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
       ></FilePicker>}
+
+      {navigation === "Files" && <Files setNavigation={setNavigation}></Files>}
 
     </>
   )

@@ -1,8 +1,20 @@
 import { View, Text, TouchableOpacity, Image } from "react-native"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
+import { useState, useEffect } from "react"
+import supabase from "../SupaBase"
 
 const Welcome = ({ setNavigation }: any) => {
+    const [isLogIn, setIsLogIn] = useState(false)
+
+    useEffect(() => {
+        const session = supabase.auth.session()
+        if (!session) {
+        }else{
+            setNavigation('Files')
+        }
+    }, [])
+
     return (
         <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
 

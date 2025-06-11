@@ -1,20 +1,15 @@
-import React, { useRef, useEffect } from 'react'
-import { View, Text, Button } from 'react-native'
+import React, { useEffect } from 'react'
+import { View } from 'react-native'
 import { WebView } from 'react-native-webview'
-import { useState } from 'react'
 import HtmlContent from '../HtmlContent.tsx'
 import { useTimeout } from '../useTimeout.tsx'
-import FilePicker from '../components/FilePicker.tsx'
 import { StyleSheet } from 'react-native'
 import Header from './Header.tsx'
+import SaveWord from './SaveWord.tsx'
 
 
 export default function TextSelector({ setNavigation, webviewRef, selectedText, setSelectedText, finalSelection, setFinalSelection, isLoading, setIsLoading, translatedText, setTranslatedText, words, setWords, html, setHtml, text, setText }: any) {
 
-
-  useEffect(() => {
-    console.log(words)
-  }, [words])
 
   useEffect(() => {
     const phrases = text.split(' ')
@@ -55,6 +50,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
     <View style={styles.container}>
 
       <Header Traslate="Hola" setNavigation={setNavigation}></Header>
+      <SaveWord></SaveWord>
 
       {text && <View style={{ width: '100%', flex: 1 }}>
         <WebView
