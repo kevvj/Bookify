@@ -16,21 +16,7 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
   const [fileText, setFileText] = useState('a')
   const [traslateText, setTraslateText] = useState('Texto a traducir')
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  const fetchData = async () => {
-    const { data, error } = await supabase.from('words').select('*')
-    if (error) {
-      console.error('Error:', error)
-    } else {
-      console.log('datos: ', data)
-      setWords(data.map((w) => {
-        return w.word
-      }))
-    }
-  }
+  
 
   const pickFile = async () => {
 
@@ -103,7 +89,7 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
       console.error('Error inserting data:', error)
     }
 
-    fetchData()
+  //fetchData()
   }
 
 

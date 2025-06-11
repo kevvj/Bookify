@@ -28,11 +28,6 @@ export default function App() {
     }
   }, [])
 
-
-  useEffect(() => {
-    console.log(words)
-  }, [words])
-
   useEffect(() => {
     const phrases = text.split(' ')
     const spans = phrases.map((w) => {

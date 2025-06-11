@@ -6,10 +6,24 @@ import { useTimeout } from '../useTimeout.tsx'
 import { StyleSheet } from 'react-native'
 import Header from './Header.tsx'
 import SaveWord from './SaveWord.tsx'
+import supabase from '../SupaBase.tsx'
 
 
 export default function TextSelector({ setNavigation, webviewRef, selectedText, setSelectedText, finalSelection, setFinalSelection, isLoading, setIsLoading, translatedText, setTranslatedText, words, setWords, html, setHtml, text, setText }: any) {
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from('words').select('*')
+      if (error) {
+        console.error('Error:', error)
+      } else {
+        setWords(data.map((w) => {
+          return w.word
+        }))
+      }
+    }
+    fetchData()
+  }, [])
   useEffect(() => {
     if (finalSelection) {
       traducirTexto(finalSelection, "EN")
