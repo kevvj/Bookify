@@ -20,6 +20,13 @@ export default function App() {
   const [html, setHtml] = useState('<span>hola</span>')
   const [text, setText] = useState('')
 
+  useEffect(() => {
+    const session = supabase.auth.session()
+    if (!session) {
+    } else {
+      setNavigation('Files')
+    }
+  }, [])
 
 
   useEffect(() => {
@@ -38,6 +45,8 @@ export default function App() {
     setFinalSelection(selectedText)
   }, selectedText === finalSelection ? null : 1500)
 
+
+
   return (
     <>
       {navigation === "Welcome" && <Welcome setNavigation={setNavigation} />}
@@ -50,15 +59,16 @@ export default function App() {
         finalSelection={finalSelection} setFinalSelection={setFinalSelection} isLoading={isLoading} setIsLoading={setIsLoading} translatedText={translatedText} setTranslatedText={setTranslatedText} words={words} setWords={setWords} html={html} setHtml={setHtml} text={text} setText={setText}
       ></TextSelector>}
 
-      {navigation === "Registration" && 
-      
-      <Registration setNavigation={setNavigation}></Registration>}
+      {navigation === "Registration" &&
+
+        <Registration setNavigation={setNavigation}></Registration>}
 
       {navigation === "FilePicker" && <FilePicker
+        setTranslatedText={setTranslatedText}
         setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
       ></FilePicker>}
 
-      {navigation === "Files" && <Files setNavigation={setNavigation}></Files>}
+      {navigation === "Files" && <Files setNavigation={setNavigation} setText={setText} setIsLoading={setIsLoading}></Files>}
 
     </>
   )

@@ -10,6 +10,11 @@ import SaveWord from './SaveWord.tsx'
 
 export default function TextSelector({ setNavigation, webviewRef, selectedText, setSelectedText, finalSelection, setFinalSelection, isLoading, setIsLoading, translatedText, setTranslatedText, words, setWords, html, setHtml, text, setText }: any) {
 
+  useEffect(() => {
+    if (finalSelection) {
+      traducirTexto(finalSelection, "EN")
+    }
+  }, [finalSelection])
 
   useEffect(() => {
     const phrases = text.split(' ')
@@ -22,6 +27,37 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   useTimeout(() => {
     setFinalSelection(selectedText)
   }, selectedText === finalSelection ? null : 1500)
+
+  const traducirTexto = async (textoOriginal: string, idiomaDestino = 'EN') => {
+    try {
+      const params = new URLSearchParams();
+      params.append('auth_key', 'd9e72a48-92f8-40f6-9829-7a16a507fd91:fx'); // <-- API key va en el body
+      params.append('text', textoOriginal);
+      params.append('target_lang', idiomaDestino); // 'EN', 'ES', 'FR', etc.
+
+      const response = await fetch('https://api-free.deepl.com/v2/translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+      })
+
+      const data = await response.json()
+
+      if (data.message) {
+        console.warn('Error al traducir:', data.message)
+        return null
+      }
+      setTranslatedText(data.translations?.[0]?.text)
+      console.log(data)
+      return data.translations?.[0]
+
+    } catch (error) {
+      console.error('Error al traducir con DeepL:', error)
+      return null
+    }
+  }
 
   const handleMessage = (event: any) => {
     const ST = event.nativeEvent.data
@@ -50,7 +86,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
     <View style={styles.container}>
 
       <Header Traslate="Hola" setNavigation={setNavigation}></Header>
-      <SaveWord></SaveWord>
+      <SaveWord Traslate={translatedText}></SaveWord>
 
       {text && <View style={{ width: '100%', flex: 1 }}>
         <WebView

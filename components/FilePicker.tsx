@@ -12,16 +12,9 @@ interface PickedFile {
   size?: number | null;
 }
 
-const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWords, words, setNavigation, setHtml, navigation }: any) => {
+const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWords, words, setNavigation, setHtml, navigation, setTranslatedText}: any) => {
   const [fileText, setFileText] = useState('a')
   const [traslateText, setTraslateText] = useState('Texto a traducir')
-
-
-  useEffect(() => {
-    if (finalSelection) {
-      traducirTexto(finalSelection, "EN")
-    }
-  }, [finalSelection])
 
   useEffect(() => {
     fetchData()
@@ -83,36 +76,7 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
     }
   }
 
-  const traducirTexto = async (textoOriginal: string, idiomaDestino = 'EN') => {
-    try {
-      const params = new URLSearchParams();
-      params.append('auth_key', 'd9e72a48-92f8-40f6-9829-7a16a507fd91:fx'); // <-- API key va en el body
-      params.append('text', textoOriginal);
-      params.append('target_lang', idiomaDestino); // 'EN', 'ES', 'FR', etc.
-
-      const response = await fetch('https://api-free.deepl.com/v2/translate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: params.toString(),
-      })
-
-      const data = await response.json()
-
-      if (data.message) {
-        console.warn('Error al traducir:', data.message)
-        return null
-      }
-      setTraslateText(data.translations?.[0]?.text)
-      console.log(data)
-      return data.translations?.[0]
-
-    } catch (error) {
-      console.error('Error al traducir con DeepL:', error)
-      return null
-    }
-  }
+  
 
 
 
