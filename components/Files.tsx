@@ -24,6 +24,16 @@ const Files = ({ setNavigation }: any) => {
 
             data && setFiles(data.filter(item => item.name.endsWith('.pdf')))
 
+
+            const response  = await fetch('https://bookify-backend-dld4.onrender.com/pdfurl', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: "https://wqqrmizomxkmgbzwjxrd.supabase.co/storage/v1/object/public/files/allfiles/Ejemplo_de_texto_de_pdf.pdf" }),
+            })
+
+            const result = await response.json()
+
+            console.log(result)
         }
 
         fetchData()

@@ -53,8 +53,6 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
         console.error('Error desconocido:', err)
       }
     }
-
-
   }
 
   const setData = async (fileInfo: PickedFile) => {
@@ -171,8 +169,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: 120,
     alignSelf: "center"
-
-
   }
 })
 
