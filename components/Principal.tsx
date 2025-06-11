@@ -12,16 +12,6 @@ import supabase from '../SupaBase.tsx'
 export default function TextSelector({ setNavigation, webviewRef, selectedText, setSelectedText, finalSelection, setFinalSelection, isLoading, setIsLoading, translatedText, setTranslatedText, words, setWords, html, setHtml, text, setText }: any) {
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from('words').select('*')
-      if (error) {
-        console.error('Error:', error)
-      } else {
-        setWords(data.map((w) => {
-          return w.word
-        }))
-      }
-    }
     fetchData()
   }, [])
   useEffect(() => {
@@ -41,6 +31,17 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   useTimeout(() => {
     setFinalSelection(selectedText)
   }, selectedText === finalSelection ? null : 1500)
+
+  const fetchData = async () => {
+    const { data, error } = await supabase.from('words').select('*')
+    if (error) {
+      console.error('Error:', error)
+    } else {
+      setWords(data.map((w) => {
+        return w.word
+      }))
+    }
+  }
 
   const traducirTexto = async (textoOriginal: string, idiomaDestino = 'EN') => {
     try {
@@ -100,7 +101,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
     <View style={styles.container}>
 
       <Header Traslate="Hola" setNavigation={setNavigation}></Header>
-      <SaveWord Traslate={translatedText}></SaveWord>
+      <SaveWord Traslate={translatedText} fetchData={fetchData} finalSelection={finalSelection}></SaveWord>
 
       {text && <View style={{ width: '100%', flex: 1 }}>
         <WebView

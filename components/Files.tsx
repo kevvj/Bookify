@@ -4,6 +4,7 @@ import { View, Text, Image } from "react-native"
 import Header from "./Header"
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
+import FilePicker from "./FilePicker"
 
 const Files = ({ setNavigation, setText, setIsLoading }: any) => {
 
@@ -77,9 +78,9 @@ const Files = ({ setNavigation, setText, setIsLoading }: any) => {
                         <FontAwesomeIcon icon={faFilePdf}></FontAwesomeIcon>
                     </View>
                 ))}
-
-
             </View>
+
+            <FilePicker></FilePicker>
         </>
     )
 }

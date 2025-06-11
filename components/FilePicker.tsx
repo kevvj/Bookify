@@ -62,42 +62,10 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
     }
   }
 
-  
-
-
-
-  const addWords = async (words: string): Promise<void> => {
-    const session = supabase.auth.session()
-    if (!session) {
-      console.error('User not logged in')
-      return
-    }
-
-    const user = supabase.auth.user()
-    if (!user) {
-      console.error('Error fetching user')
-      return
-    }
-    const { data, error } = await supabase
-      .from("words")
-      .insert([
-        { word: words, user_id: user.id }
-      ])
-      .select()
-
-    if (error) {
-      console.error('Error inserting data:', error)
-    }
-
-  //fetchData()
-  }
-
-
 
   return (
     <>
-    <Header setNavigation ={setNavigation}></Header>
-      <View style={{ marginTop: 70 }}>
+      <View style={{flex:1}}>
         <TouchableOpacity onPress={() => {
           setNavigation('Home')
           pickFile()
