@@ -15,7 +15,7 @@ export default function App() {
   const [selectedText, setSelectedText] = useState('')
   const [finalSelection, setFinalSelection] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [translatedText, setTranslatedText] = useState('hola')
+  const [translatedText, setTranslatedText] = useState('sin traducción...')
   const [words, setWords] = useState<string[]>([])
   const [html, setHtml] = useState('<span>hola</span>')
   const [text, setText] = useState('')
@@ -63,7 +63,10 @@ export default function App() {
         setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
       ></FilePicker>}
 
-      {navigation === "Files" && <Files setNavigation={setNavigation} setText={setText} setIsLoading={setIsLoading}></Files>}
+      {navigation === "Files" && <Files
+        setNavigation={setNavigation} setText={setText} setIsLoading={setIsLoading}
+        setTranslatedText={setTranslatedText}
+        finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setHtml={setHtml} navigation={navigation}></Files>}
 
     </>
   )

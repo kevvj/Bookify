@@ -5,6 +5,11 @@ import { StyleSheet } from 'react-native'
 import supabase from '../SupaBase.tsx'
 import 'react-native-url-polyfill/auto'
 import Header from './Header.tsx'
+import RNFS from 'react-native-fs'
+import { Buffer } from 'buffer'
+
+global.Buffer = global.Buffer || Buffer
+
 interface PickedFile {
   name?: string | null;
   type?: string | null;
@@ -12,11 +17,9 @@ interface PickedFile {
   size?: number | null;
 }
 
-const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWords, words, setNavigation, setHtml, navigation, setTranslatedText}: any) => {
+const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWords, words, setNavigation, setHtml, navigation, setTranslatedText }: any) => {
   const [fileText, setFileText] = useState('a')
   const [traslateText, setTraslateText] = useState('Texto a traducir')
-
-  
 
   const pickFile = async () => {
 
@@ -24,7 +27,9 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
       const [res] = await pick({
         type: ['*/*'],
       })
-      if (res) setData(res)
+      if (res) {
+        setData(res)
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error('Error al seleccionar archivo:', err.message)
@@ -47,7 +52,6 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
     const pruebaa = await fetch('https://bookify-backend-dld4.onrender.com/prueba', {
       method: 'POST',
       body: formData,
-
     })
 
     const result = await pruebaa.json()
@@ -59,13 +63,37 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
     if (result.texto) {
       setIsLoading(false)
       setNavigation('Home')
+
+      uploadToSupabase(fileInfo)
     }
+  }
+
+  const uploadToSupabase = async (fileInfo: PickedFile) => {
+    const filePath = fileInfo.uri.replace('file://', '')
+    const fileName = fileInfo.name || 'archivo.pdf'
+    const fileType = fileInfo.type || 'application/pdf'
+
+    const base64Data = await RNFS.readFile(filePath, 'base64')
+    const fileBuffer = Buffer.from(base64Data, 'base64')
+
+    const safeFileName = fileName.replace(/\s+/g, '_').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    const remotePath = `allfiles/${safeFileName}`
+
+    const { data, error } = await supabase.storage
+      .from('files')
+      .upload(remotePath, fileBuffer, {
+        contentType: fileType,
+        upsert: true,
+      })
+
+    if (error) console.error('Error al subir:', error)
+    else console.log('Subido correctamente:', data?.Key)
   }
 
 
   return (
     <>
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
         <TouchableOpacity onPress={() => {
           setNavigation('Home')
           pickFile()

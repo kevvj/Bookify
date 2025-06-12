@@ -6,7 +6,7 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import FilePicker from "./FilePicker"
 
-const Files = ({ setNavigation, setText, setIsLoading }: any) => {
+const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalSelection, selectedText, setHtml, setWords, navigation, words}: any) => {
 
     const [Files, setFiles] = useState<any[]>([])
 
@@ -80,7 +80,10 @@ const Files = ({ setNavigation, setText, setIsLoading }: any) => {
                 ))}
             </View>
 
-            <FilePicker></FilePicker>
+            <FilePicker 
+            setTranslatedText={setTranslatedText}
+            setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
+            ></FilePicker>
         </>
     )
 }
