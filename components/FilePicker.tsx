@@ -17,9 +17,18 @@ interface PickedFile {
   size?: number | null;
 }
 
-const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWords, words, setNavigation, setHtml, navigation, setTranslatedText }: any) => {
-  const [fileText, setFileText] = useState('a')
-  const [traslateText, setTraslateText] = useState('Texto a traducir')
+const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    const session = supabase.auth.session()
+    if (!session) {
+      setIsLoggedIn(false)
+    } else {
+      setIsLoggedIn(true)
+    }
+  }, [])
 
   const pickFile = async () => {
 
@@ -56,7 +65,6 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
 
     const result = await pruebaa.json()
     console.log(result)
-    setFileText(result.texto)
     setText(result.texto)
     console.log("tumama")
 
@@ -64,7 +72,7 @@ const FilePicker = ({ setText, setIsLoading, finalSelection, selectedText, setWo
       setIsLoading(false)
       setNavigation('Home')
 
-      uploadToSupabase(fileInfo)
+      isLoggedIn && uploadToSupabase(fileInfo)
     }
   }
 

@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { useState, useEffect } from "react"
 import supabase from "../SupaBase"
+import { faX } from "@fortawesome/free-solid-svg-icons"
 
 const Welcome = ({ setNavigation }: any) => {
-    const [isLogIn, setIsLogIn] = useState(false)
 
     useEffect(() => {
         const session = supabase.auth.session()
@@ -52,6 +52,9 @@ const Welcome = ({ setNavigation }: any) => {
                 </View>
 
             </View>
+
+            <TouchableOpacity 
+            onPress={() =>{setNavigation('Files')}} style={{position:"absolute",top:200, right:40}} ><FontAwesomeIcon icon={faX}></FontAwesomeIcon></TouchableOpacity>
 
         </View>
     )

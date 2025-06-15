@@ -11,7 +11,7 @@ import Files from './components/Files'
 import SettingsPage from './components/Settings'
 
 export default function App() {
-  const [navigation, setNavigation] = useState("Welcome")
+  const [navigation, setNavigation] = useState("Files")
   const webviewRef = useRef(null)
   const [selectedText, setSelectedText] = useState('')
   const [finalSelection, setFinalSelection] = useState('')
@@ -24,9 +24,7 @@ export default function App() {
   useEffect(() => {
     const session = supabase.auth.session()
     if (!session) {
-      setNavigation('Files')
     } else {
-      setNavigation('Files')
     }
   }, [])
 

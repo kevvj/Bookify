@@ -2,6 +2,8 @@ import { View, Text, Button, TextInput, TouchableOpacity } from "react-native"
 import React, { useState } from "react"
 import { signIn } from '../hooks/SignIn.tsx'
 import { StyleSheet } from 'react-native'
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
+import { faX } from "@fortawesome/free-solid-svg-icons"
 
 export default function Registration({ setNavigation }: any) {
 
@@ -80,6 +82,9 @@ export default function Registration({ setNavigation }: any) {
 
             </View>
 
+            <TouchableOpacity
+                onPress={() => { setNavigation('Login') }} style={{ position: "absolute", top: 200, right: 40 }} ><FontAwesomeIcon icon={faX}></FontAwesomeIcon></TouchableOpacity>
+
         </View>
     )
 }
@@ -95,13 +100,13 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: "white", 
+        color: "white",
         alignSelf: "center"
     },
 
-    button_container:{
-        gap:10,
-        marginTop:20,
-        flexDirection:"row"
+    button_container: {
+        gap: 10,
+        marginTop: 20,
+        flexDirection: "row"
     }
 })

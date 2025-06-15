@@ -25,7 +25,7 @@ const Header = ({ Traslate, setNavigation }: any) => {
                 </Text>
 
 
-                <Text onPress={() => setNavigation("Welcome")}>
+                <Text onPress={() => setNavigation("Files")}>
                     <FontAwesomeIcon icon={faHome} ></FontAwesomeIcon>
                 </Text>
 

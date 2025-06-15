@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react"
 import { signIn } from '../hooks/SignIn.tsx'
 import { StyleSheet } from 'react-native'
 import supabase from "../SupaBase.tsx"
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
+import { faX } from "@fortawesome/free-solid-svg-icons"
 
 export default function LogIn({ setNavigation }: any) {
 
@@ -25,7 +27,7 @@ export default function LogIn({ setNavigation }: any) {
 
         if (session) {
             setNavigation('Files')
-        }else{
+        } else {
             setError('Credenciales no existen')
             return
         }
@@ -63,7 +65,7 @@ export default function LogIn({ setNavigation }: any) {
 
             </View>
 
-            <Text style ={{color:"red", textAlign:"center"}}>{error}</Text>
+            <Text style={{ color: "red", textAlign: "center" }}>{error}</Text>
 
             <View style={styles.button_container}>
 
@@ -77,6 +79,8 @@ export default function LogIn({ setNavigation }: any) {
 
             </View>
 
+            <TouchableOpacity
+                onPress={() => { setNavigation('Files') }} style={{ position: "absolute", top: 200, right: 40 }} ><FontAwesomeIcon icon={faX}></FontAwesomeIcon></TouchableOpacity>
         </View>
     )
 }
