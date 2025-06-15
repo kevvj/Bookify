@@ -8,6 +8,7 @@ import FilePicker from './components/FilePicker'
 import { useTimeout } from './useTimeout'
 import supabase from './SupaBase'
 import Files from './components/Files'
+import SettingsPage from './components/Settings'
 
 export default function App() {
   const [navigation, setNavigation] = useState("Welcome")
@@ -62,6 +63,8 @@ export default function App() {
         setTranslatedText={setTranslatedText}
         setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
       ></FilePicker>}
+
+      {navigation === "Settings" && <SettingsPage setNavigation={setNavigation}></SettingsPage>}
 
       {navigation === "Files" && <Files
         setNavigation={setNavigation} setText={setText} setIsLoading={setIsLoading}

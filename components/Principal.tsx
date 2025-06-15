@@ -16,7 +16,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   }, [])
   useEffect(() => {
     if (finalSelection) {
-      traducirTexto(finalSelection, "EN")
+      traducirTexto(finalSelection, "ES")
     }
   }, [finalSelection])
 
@@ -43,7 +43,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
     }
   }
 
-  const traducirTexto = async (textoOriginal: string, idiomaDestino = 'EN') => {
+  const traducirTexto = async (textoOriginal: string, idiomaDestino:string) => {
     try {
       const params = new URLSearchParams();
       params.append('auth_key', 'd9e72a48-92f8-40f6-9829-7a16a507fd91:fx'); // <-- API key va en el body

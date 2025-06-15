@@ -9,5 +9,8 @@ export const signIn = async (email: string, password: string) => {
 
     if (error) {
       console.error('Error al iniciar sesión:', error)
+      return false
+    }else{
+      return true
     }
   }

@@ -8,6 +8,29 @@ export default function LogIn({ setNavigation }: any) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const handleLogIn = async () => {
+        if (!email) {
+            setError('No pusiste email')
+            return
+        }
+        if (!password) {
+            setError('No pusiste la contraseña')
+            return
+        }
+
+        const session = await signIn(email, password)
+
+
+        if (session) {
+            setNavigation('Files')
+        }else{
+            setError('Credenciales no existen')
+            return
+        }
+
+    }
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20 }}>
@@ -40,12 +63,11 @@ export default function LogIn({ setNavigation }: any) {
 
             </View>
 
+            <Text style ={{color:"red", textAlign:"center"}}>{error}</Text>
+
             <View style={styles.button_container}>
 
-                <TouchableOpacity onPress={() => {
-                    signIn("kevinelrey123456@gmail.com", "bendipalteo777")
-                    setNavigation('Home')
-                }} style={styles.button}>
+                <TouchableOpacity onPress={() => handleLogIn()} style={styles.button}>
                     <Text style={styles.text}>Entrar</Text>
                 </TouchableOpacity>
 

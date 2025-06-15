@@ -20,7 +20,7 @@ const Header = ({ Traslate, setNavigation }: any) => {
                 alignItems: "center",
                 justifyContent: "space-between"
             }}>
-                <Text onPress={() => setNavigation("FilePicker")}>
+                <Text onPress={() => setNavigation("Settings")}>
                     <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
                 </Text>
 
