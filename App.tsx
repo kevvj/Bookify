@@ -11,7 +11,7 @@ import Files from './components/Files'
 import SettingsPage from './components/Settings'
 
 export default function App() {
-  const [navigation, setNavigation] = useState("Files")
+  const [navigation, setNavigation] = useState("Welcome")
   const webviewRef = useRef(null)
   const [selectedText, setSelectedText] = useState('')
   const [finalSelection, setFinalSelection] = useState('')
