@@ -1,4 +1,4 @@
-const HtmlContent = (txt: string, words: string, html:string) => {
+const HtmlContent = (txt: string, words: string, html: string) => {
     return (
         `
     <html>
@@ -56,7 +56,7 @@ const HtmlContent = (txt: string, words: string, html:string) => {
               
                   window.ReactNativeWebView.postMessage(selection)
               
-          });
+          })
           document.oncontextmenu = function () {
               return false
           }

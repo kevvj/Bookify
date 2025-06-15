@@ -23,14 +23,12 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   useEffect(() => {
     const phrases = text.split(' ')
     const spans = phrases.map((w: any) => {
-      return `<span class = "${words.includes(w) ? "color" : ""}">${w}</span>`
+      return `<span class = "${words.some((word:any) => word.split(' ').includes(w)) ? "color" : ""}">${w}</span>`
     }).join('')
     setHtml(spans)
   }, [text, words])
 
-  useTimeout(() => {
-    setFinalSelection(selectedText)
-  }, selectedText === finalSelection ? null : 1500)
+
 
   const fetchData = async () => {
     const { data, error } = await supabase.from('words').select('*')
@@ -43,7 +41,16 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
     }
   }
 
-  const traducirTexto = async (textoOriginal: string, idiomaDestino:string) => {
+  useTimeout(() => {
+    const aaa = selectedText.replace(/[\n\r]+/g, ' ')
+
+    setFinalSelection(aaa)
+
+    console.log(JSON.stringify(finalSelection))
+
+  }, selectedText === finalSelection ? null : 1500)
+
+  const traducirTexto = async (textoOriginal: string, idiomaDestino: string) => {
     try {
       const params = new URLSearchParams();
       params.append('auth_key', 'd9e72a48-92f8-40f6-9829-7a16a507fd91:fx'); // <-- API key va en el body
@@ -76,7 +83,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
 
   const handleMessage = (event: any) => {
     const ST = event.nativeEvent.data
-    setSelectedText(ST)
+    setSelectedText(ST.replace(/[\n\r]+/g, ' '))
   }
 
   const styles = StyleSheet.create({

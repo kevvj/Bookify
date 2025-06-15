@@ -24,22 +24,21 @@ export default function App() {
   useEffect(() => {
     const session = supabase.auth.session()
     if (!session) {
+      setNavigation('Files')
     } else {
       setNavigation('Files')
     }
   }, [])
 
-  useEffect(() => {
-    const phrases = text.split(' ')
-    const spans = phrases.map((w) => {
-      return `<span class = "${words.includes(w) ? "color" : ""}">${w}</span>`
-    }).join('')
-    setHtml(spans)
-  }, [text, words])
 
-  useTimeout(() => {
-    setFinalSelection(selectedText)
-  }, selectedText === finalSelection ? null : 1500)
+   useTimeout(() => {
+      const aaa = selectedText.replace(/[\n\r]+/g, ' ')
+  
+      setFinalSelection(aaa)
+  
+      console.log(JSON.stringify(finalSelection))
+  
+    }, selectedText === finalSelection ? null : 1500)
 
 
 

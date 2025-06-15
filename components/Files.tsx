@@ -9,11 +9,14 @@ import FilePicker from "./FilePicker"
 const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalSelection, selectedText, setHtml, setWords, navigation, words}: any) => {
 
     const [Files, setFiles] = useState<any[]>([])
+    const [isLoggin, setIsLoggin] = useState(false)
 
     useEffect(() => {
         const session = supabase.auth.session()
         if (!session) {
-            setNavigation('LogIn')
+            setIsLoggin(false)
+        }else{
+            setIsLoggin(true)
         }
 
         const fetchData = async () => {
@@ -24,6 +27,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
             if (error) return
 
             data && setFiles(data.filter(item => item.name.endsWith('.pdf')))
+            console.log(data)
         }
 
         fetchData()
@@ -69,7 +73,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
 
                 <Text style={{ fontSize: 20 }}>Archivos recientes</Text>
 
-                {Files.map(item => (
+                {isLoggin ? Files.map(item => (
                     <View key={item.id} style={{ borderWidth: 1, borderColor: "black", paddingHorizontal: 10, paddingVertical: 5, width: 300, borderRadius: 5, flexDirection: "row", justifyContent: "space-between" }}>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: "black", width: 240 }} onPress={() => {
                             handleFile(item.name)
@@ -77,7 +81,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
                         }}>{item.name}</Text>
                         <FontAwesomeIcon icon={faFilePdf}></FontAwesomeIcon>
                     </View>
-                ))}
+                )): <Text>Esperando a que inicies sesión</Text>}
             </View>
 
             <FilePicker 
