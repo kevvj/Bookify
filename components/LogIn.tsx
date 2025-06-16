@@ -35,7 +35,7 @@ export default function LogIn({ setNavigation }: any) {
     }
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20 }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20, backgroundColor:"white"}}>
             <Text style={{ fontSize: 24, marginBottom: 20 }}>Inicio de sesión</Text>
 
             <View style={{ gap: 10 }}>

@@ -9,9 +9,10 @@ import { faHome } from "@fortawesome/free-solid-svg-icons"
 const Header = ({ Traslate, setNavigation }: any) => {
     return (
         <View style={{
-            flex: 0.05,
+            flex: 0.1,
             padding: 30,
-            marginTop: 40,
+            marginTop: 40, 
+            backgroundColor:"white"
             
         }}>
 

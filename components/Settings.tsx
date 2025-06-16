@@ -5,7 +5,7 @@ const SettingsPage = ({setNavigation}:any) => {
     return (
         <>
             <Header setNavigation ={setNavigation}></Header>
-            <View>
+            <View style ={{backgroundColor:"white"}}>
                 <Text style={{ alignSelf: "center", fontSize: 20 }}>
                     Cambiar idioma
                 </Text>

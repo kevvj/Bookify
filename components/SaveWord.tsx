@@ -38,11 +38,11 @@ const SaveWord = ({ Traslate, fetchData, finalSelection }: any) => {
                     backgroundColor: 'black',
                     padding: 10,
                     borderRadius: 5,
-                    width: 121,
+                    width: 140,
                     alignSelf: "center",
                     marginTop: 20
                 }}>
-                <Text style={{ color: "white" }}>Guardar palabra</Text>
+                <Text style={{ color: "white", textAlign:"center"}}>Guardar palabra</Text>
             </TouchableOpacity>
         </View>
     )

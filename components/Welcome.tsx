@@ -16,7 +16,7 @@ const Welcome = ({ setNavigation }: any) => {
     }, [])
 
     return (
-        <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
+        <View style={{ flex: 1, justifyContent: "center", alignContent: "center", backgroundColor:"white"}}>
 
             <View style={{ justifyContent: "center", alignItems: "center" }}>
                 <Text style={{ fontSize: 40 }}>

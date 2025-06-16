@@ -70,7 +70,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
         <>
             <Header setNavigation={setNavigation}></Header>
 
-            <View style={{ alignItems: "center", flex: 1, gap: 10 }}>
+            <View style={{ alignItems: "center", flex: 1, gap: 10, backgroundColor:"white"}}>
 
                 <Text style={{ fontSize: 20 }}>Archivos recientes</Text>
 

@@ -23,7 +23,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   useEffect(() => {
     const phrases = text.split(' ')
     const spans = phrases.map((w: any) => {
-      return `<span class = "${words.some((word:any) => word.split(' ').includes(w)) ? "color" : ""}">${w}</span>`
+      return `<span class = "${words.some((word: any) => word.split(' ').includes(w)) ? "color" : ""}">${w}</span>`
     }).join('')
     setHtml(spans)
   }, [text, words])
@@ -89,7 +89,8 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection: 'column',
+      flexDirection: 'column', 
+      backgroundColor: "white"
     },
 
     button: {

@@ -11,7 +11,7 @@ export default function Registration({ setNavigation }: any) {
     const [password, setPassword] = useState('')
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20 }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20, backgroundColor:"white" }}>
             <Text style={{ fontSize: 24, marginBottom: 20 }}>Registro</Text>
 
             <View style={{ gap: 10 }}>

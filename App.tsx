@@ -9,6 +9,7 @@ import { useTimeout } from './useTimeout'
 import supabase from './SupaBase'
 import Files from './components/Files'
 import SettingsPage from './components/Settings'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function App() {
   const [navigation, setNavigation] = useState("Welcome")
@@ -21,23 +22,39 @@ export default function App() {
   const [html, setHtml] = useState('<span>hola</span>')
   const [text, setText] = useState('')
 
+  useTimeout(() => {
+    const aaa = selectedText.replace(/[\n\r]+/g, ' ')
+
+    setFinalSelection(aaa)
+
+    console.log(JSON.stringify(finalSelection))
+
+  }, selectedText === finalSelection ? null : 1500)
+
   useEffect(() => {
-    const session = supabase.auth.session()
-    if (!session) {
-    } else {
-    }
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        AsyncStorage.setItem('session', JSON.stringify(session))
+      } else {
+        AsyncStorage.removeItem('session')
+      }
+    })
+
+    return () => subscription?.unsubscribe()
+
   }, [])
 
+  useEffect(() => {
+    const restore = async () => {
+      const stored = await AsyncStorage.getItem('session')
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        supabase.auth.setSession(parsed)
+      }
+    }
 
-   useTimeout(() => {
-      const aaa = selectedText.replace(/[\n\r]+/g, ' ')
-  
-      setFinalSelection(aaa)
-  
-      console.log(JSON.stringify(finalSelection))
-  
-    }, selectedText === finalSelection ? null : 1500)
-
+    restore()
+  }, [])
 
 
   return (
@@ -52,14 +69,8 @@ export default function App() {
         finalSelection={finalSelection} setFinalSelection={setFinalSelection} isLoading={isLoading} setIsLoading={setIsLoading} translatedText={translatedText} setTranslatedText={setTranslatedText} words={words} setWords={setWords} html={html} setHtml={setHtml} text={text} setText={setText}
       ></TextSelector>}
 
-      {navigation === "Registration" &&
+      {navigation === "Registration" && <Registration setNavigation={setNavigation}></Registration>}
 
-        <Registration setNavigation={setNavigation}></Registration>}
-
-      {navigation === "FilePicker" && <FilePicker
-        setTranslatedText={setTranslatedText}
-        setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
-      ></FilePicker>}
 
       {navigation === "Settings" && <SettingsPage setNavigation={setNavigation}></SettingsPage>}
 
