@@ -1,10 +1,9 @@
-import { View, Text, Button } from 'react-native'
+import { View} from 'react-native'
 import TextSelector from './components/Principal'
 import { useState, useRef, useEffect } from 'react'
 import LogIn from './components/LogIn'
 import Welcome from './components/Welcome'
 import Registration from './components/Registration'
-import FilePicker from './components/FilePicker'
 import { useTimeout } from './useTimeout'
 import supabase from './SupaBase'
 import Files from './components/Files'
@@ -58,7 +57,7 @@ export default function App() {
 
 
   return (
-    <>
+    <View style={{flex:1, backgroundColor:"white"}}>
       {navigation === "Welcome" && <Welcome setNavigation={setNavigation} />}
 
       {navigation === "Login" && <LogIn setNavigation={setNavigation}></LogIn>}
@@ -79,7 +78,7 @@ export default function App() {
         setTranslatedText={setTranslatedText}
         finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setHtml={setHtml} navigation={navigation}></Files>}
 
-    </>
+    </View>
   )
 
 }
