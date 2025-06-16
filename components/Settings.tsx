@@ -1,9 +1,10 @@
-import { View, Text } from "react-native"
+import { View, Text,ScrollView } from "react-native"
 import Header from "./Header"
+import Languages from "./LanguageItems"
 
 const SettingsPage = ({setNavigation}:any) => {
     return (
-        <>
+        <ScrollView>
             <Header setNavigation ={setNavigation}></Header>
             <View style ={{backgroundColor:"white"}}>
                 <Text style={{ alignSelf: "center", fontSize: 20 }}>
@@ -23,7 +24,9 @@ const SettingsPage = ({setNavigation}:any) => {
 
                 <Text style={{marginTop:40, textAlign:"center"}}>No se otras configuraciones aqui raras</Text>
             </View>
-        </>
+
+            <Languages></Languages>
+        </ScrollView>
     )
 }
 
