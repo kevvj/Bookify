@@ -1,4 +1,4 @@
-import { View} from 'react-native'
+import { View } from 'react-native'
 import TextSelector from './components/Principal'
 import { useState, useRef, useEffect } from 'react'
 import LogIn from './components/LogIn'
@@ -9,6 +9,7 @@ import supabase from './SupaBase'
 import Files from './components/Files'
 import SettingsPage from './components/Settings'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import UserPage from './components/UserPage'
 
 export default function App() {
   const [navigation, setNavigation] = useState("Welcome")
@@ -57,7 +58,7 @@ export default function App() {
 
 
   return (
-    <View style={{flex:1, backgroundColor:"white"}}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       {navigation === "Welcome" && <Welcome setNavigation={setNavigation} />}
 
       {navigation === "Login" && <LogIn setNavigation={setNavigation}></LogIn>}
@@ -77,6 +78,8 @@ export default function App() {
         setNavigation={setNavigation} setText={setText} setIsLoading={setIsLoading}
         setTranslatedText={setTranslatedText}
         finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setHtml={setHtml} navigation={navigation}></Files>}
+
+      {navigation === "UserPage" && <UserPage setNavigation={setNavigation}></UserPage>}
 
     </View>
   )
