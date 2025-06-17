@@ -107,7 +107,7 @@ const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
           setNavigation('Home')
           pickFile()
         }} style={styles.button}>
-          <Text style={{ color: 'white', textAlign:"center" }}>Elije un archivo</Text>
+          <Text style={{ color: 'white', textAlign:"center" }}>Elige un archivo</Text>
         </TouchableOpacity>
         <Text style={{ alignSelf: "center" }}>El formato del archivo debe de ser compatible</Text>
       </View>

@@ -10,7 +10,7 @@ const SettingsPage = ({ setNavigation }: any) => {
     const [source, setSource] = useState(false)
     const [target, setTarget] = useState(false)
     return (
-        <ScrollView style={{ flex: 1 }}>
+        <View style={{ flex: 1, height:"100%" }}>
             <Header setNavigation={setNavigation}></Header>
             <View style={{ backgroundColor: "white", flex:1, marginTop:50 }}>
                 <Text style={{ alignSelf: "center", fontSize: 20 }}>
@@ -45,7 +45,7 @@ const SettingsPage = ({ setNavigation }: any) => {
             </View>
 
             <Languages isOpen={isOpen} setIsOpen={setIsOpen} setSourceLanguage={setSourceLanguage} setTargetLanguage={setTargetLanguage} source={source} target={target} setSource={setSource} setTarget={setTarget}></Languages>
-        </ScrollView>
+        </View>
     )
 }
 
