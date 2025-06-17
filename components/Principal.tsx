@@ -7,12 +7,24 @@ import { StyleSheet } from 'react-native'
 import Header from './Header.tsx'
 import SaveWord from './SaveWord.tsx'
 import supabase from '../SupaBase.tsx'
+import { useState } from 'react'
 
 
 export default function TextSelector({ setNavigation, webviewRef, selectedText, setSelectedText, finalSelection, setFinalSelection, isLoading, setIsLoading, translatedText, setTranslatedText, words, setWords, html, setHtml, text, setText }: any) {
 
+  const [userId, setUserId] = useState('')
+
   useEffect(() => {
-    fetchData()
+    const session = supabase.auth.session()
+    if (!session) {
+    } else {
+      const id = session.user?.id
+      if (!id) return
+
+      setUserId(id)
+      fetchData(id)
+      console.log(id)
+    }
   }, [])
   useEffect(() => {
     if (finalSelection) {
@@ -30,8 +42,8 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
 
 
 
-  const fetchData = async () => {
-    const { data, error } = await supabase.from('words').select('*')
+  const fetchData = async (id: string) => {
+    const { data, error } = await supabase.from('words').select('*').eq('user_id', id)
     if (error) {
       console.error('Error:', error)
     } else {
@@ -46,7 +58,6 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
 
     setFinalSelection(aaa)
 
-    console.log(JSON.stringify(finalSelection))
 
   }, selectedText === finalSelection ? null : 1500)
 
@@ -68,11 +79,9 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
       const data = await response.json()
 
       if (data.message) {
-        console.warn('Error al traducir:', data.message)
         return null
       }
       setTranslatedText(data.translations?.[0]?.text)
-      console.log(data)
       return data.translations?.[0]
 
     } catch (error) {
@@ -89,7 +98,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection: 'column', 
+      flexDirection: 'column',
       backgroundColor: "white"
     },
 
@@ -109,7 +118,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
     <View style={styles.container}>
 
       <Header Traslate="Hola" setNavigation={setNavigation}></Header>
-      <SaveWord Traslate={translatedText} fetchData={fetchData} finalSelection={finalSelection}></SaveWord>
+      <SaveWord Traslate={translatedText} fetchData={() => fetchData(userId)} finalSelection={finalSelection}></SaveWord>
 
       {text && <View style={{ width: '100%', flex: 1 }}>
         <WebView

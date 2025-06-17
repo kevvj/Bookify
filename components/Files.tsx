@@ -7,38 +7,34 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import FilePicker from "./FilePicker"
 import Words from "./Words"
 
-const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalSelection, selectedText, setHtml, setWords, navigation, words}: any) => {
+const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalSelection, selectedText, setHtml, setWords, navigation, words }: any) => {
 
     const [Files, setFiles] = useState<any[]>([])
     const [isLoggin, setIsLoggin] = useState(false)
-
+    const [userId, setUserId] = useState('')
     useEffect(() => {
         const session = supabase.auth.session()
         if (!session) {
             setIsLoggin(false)
-        }else{
+        } else {
             setIsLoggin(true)
+            const id = session.user?.id
+            setUserId(id || '')
+            fetchData(id || '')
         }
-
-        const fetchData = async () => {
-            const { data, error } = await supabase.storage
-                .from('files')
-                .list('allfiles')
-
-            if (error) return
-
-            data && setFiles(data.filter(item => item.name.endsWith('.pdf')))
-            console.log(data)
-        }
-
-        fetchData()
-
     }, [])
+
+    const fetchData = async (id: string) => {
+        const { data, error } = await supabase.storage.from('files').list(id)
+        if (!error && data) {
+            setFiles(data.filter(item => item.name.endsWith('.pdf')))
+        }
+    }
 
     const getFile = (name: string) => {
         const { data, error } = supabase.storage
             .from('files')
-            .getPublicUrl(`allfiles/${name}`)
+            .getPublicUrl(`${userId}/${name}`)
 
         if (data) return data.publicURL
     }
@@ -49,7 +45,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
 
         const { data, error } = await supabase.storage
             .from('files')
-            .list('allfiles')
+            .list(userId)
 
         if (error) return
 
@@ -61,7 +57,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
             body: JSON.stringify({ url }),
         })
         const result = await response.json()
-        console.log(result)
+        
         setText(result.texto)
         result && setIsLoading(false)
     }
@@ -70,7 +66,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
         <>
             <Header setNavigation={setNavigation}></Header>
 
-            <View style={{ alignItems: "center", flex: 1, gap: 10, backgroundColor:"white"}}>
+            <View style={{ alignItems: "center", flex: 1, gap: 10, backgroundColor: "white" }}>
 
                 <Text style={{ fontSize: 20 }}>Archivos recientes</Text>
 
@@ -82,15 +78,15 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
                         }}>{item.name}</Text>
                         <FontAwesomeIcon icon={faFilePdf}></FontAwesomeIcon>
                     </View>
-                )): <Text>Esperando a que inicies sesión</Text>}
+                )) : <Text>Esperando a que inicies sesión</Text>}
             </View>
 
-            <FilePicker 
-            setTranslatedText={setTranslatedText}
-            setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
+            <FilePicker
+                setTranslatedText={setTranslatedText}
+                setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
             ></FilePicker>
 
-            {isLoggin && <Words></Words>}
+            {isLoggin && <Words userId ={userId}></Words>}
         </>
     )
 }

@@ -20,6 +20,7 @@ interface PickedFile {
 const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userId, setUserId] = useState('')
 
   useEffect(() => {
     const session = supabase.auth.session()
@@ -27,6 +28,7 @@ const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
       setIsLoggedIn(false)
     } else {
       setIsLoggedIn(true)
+      setUserId(session?.user?.id || '')
     }
   }, [])
 
@@ -66,7 +68,6 @@ const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
     const result = await pruebaa.json()
     console.log(result)
     setText(result.texto)
-    console.log("tumama")
 
     if (result.texto) {
       setIsLoading(false)
@@ -85,7 +86,7 @@ const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
     const fileBuffer = Buffer.from(base64Data, 'base64')
 
     const safeFileName = fileName.replace(/\s+/g, '_').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    const remotePath = `allfiles/${safeFileName}`
+    const remotePath = `${userId}/${safeFileName}`
 
     const { data, error } = await supabase.storage
       .from('files')

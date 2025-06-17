@@ -10,6 +10,7 @@ import Files from './components/Files'
 import SettingsPage from './components/Settings'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import UserPage from './components/UserPage'
+import RegistrationSuccess from './components/registrationSuccess'
 
 export default function App() {
   const [navigation, setNavigation] = useState("Welcome")
@@ -80,6 +81,7 @@ export default function App() {
         finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setHtml={setHtml} navigation={navigation}></Files>}
 
       {navigation === "UserPage" && <UserPage setNavigation={setNavigation}></UserPage>}
+      {navigation === "RegistrationSuccess" && <RegistrationSuccess setNavigation={setNavigation}></RegistrationSuccess>}
 
     </View>
   )

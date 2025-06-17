@@ -28,7 +28,7 @@ const UserPage = ({ setNavigation }: any) => {
             <Header setNavigation={setNavigation}></Header>
 
             <View style={{ marginBottom: 40 }}>
-                <Text style={{ textAlign: "center" }}>Kevin José Tapias Villalba</Text>
+                <Text style={{ textAlign: "center", fontSize:25 }}>{session.user?.user_metadata?.full_name}</Text>
                 <Text style={{ textAlign: "center" }}>id: {session?.user?.id}</Text>
                 <Text style={{ textAlign: "center" }}>email: {session?.user?.email}</Text>
             </View>

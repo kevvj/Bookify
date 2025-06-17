@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 
-const Words = () => {
+const Words = ({userId}:any) => {
 
     const [words, setWords] = useState<any>([])
 
@@ -16,13 +16,13 @@ const Words = () => {
         const { data, error } = await supabase
             .from('words')
             .select('*')
+            .eq('user_id', userId)
 
         if (error) {
             console.log(error)
             return
         }
         setWords(data)
-        console.log(data)
     }
 
     const handleDelete = async (id: number) => {
