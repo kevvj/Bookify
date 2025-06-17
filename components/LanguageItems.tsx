@@ -1,13 +1,25 @@
-import { View, Text, ScrollView } from "react-native"
-const Languages = () => {
+import { useState } from "react"
+import { View, Text, ScrollView, TouchableOpacity } from "react-native"
+const Languages = ({ isOpen, setIsOpen, setSourceLanguage, setTargetLanguage, source, target, setSource, setTarget }: any) => {
 
     return (
-        <ScrollView style={{}}>
+        <ScrollView style={{ position: "absolute", backgroundColor: "white", top: "50%", left: "19%", display: isOpen ? "flex" : "none" }}>
 
-            <View style={{ borderWidth: 1, borderColor: "black", alignItems: "center", justifyContent: "center", alignSelf: 'center', width: 150, gap: 10}}>
+            <View style={{ borderWidth: 1, borderColor: "black", alignItems: "center", justifyContent: "center", alignSelf: 'center', width: 250, gap: 10 }}>
 
                 {LAN.map((item: any) => (
-                    <Text key={item.code} style={{ borderBottomWidth: 1, borderBottomColor: "black", width: "100%", textAlign: "center" }}>{item.name}</Text>
+                    <TouchableOpacity key={item.code} onPress={() => {
+                        setIsOpen(false)
+
+                        source && setSourceLanguage(item.name)
+                        target && setTargetLanguage(item.name)
+
+                        setSource(false)
+                        setTarget(false)
+
+                    }}>
+                        <Text style={{ borderBottomWidth: 1, borderBottomColor: "black", width: "100%", textAlign: "center" }}>{item.name}</Text>
+                    </TouchableOpacity>
                 ))}
             </View>
         </ScrollView>

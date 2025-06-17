@@ -1,31 +1,50 @@
-import { View, Text,ScrollView } from "react-native"
+import { View, Text, ScrollView, TouchableOpacity } from "react-native"
 import Header from "./Header"
 import Languages from "./LanguageItems"
+import { useState } from "react"
 
-const SettingsPage = ({setNavigation}:any) => {
+const SettingsPage = ({ setNavigation }: any) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [sourceLanguage, setSourceLanguage] = useState("Español")
+    const [targetLanguage, setTargetLanguage] = useState("Ingles")
+    const [source, setSource] = useState(false)
+    const [target, setTarget] = useState(false)
     return (
-        <ScrollView>
-            <Header setNavigation ={setNavigation}></Header>
-            <View style ={{backgroundColor:"white"}}>
+        <ScrollView style={{ flex: 1 }}>
+            <Header setNavigation={setNavigation}></Header>
+            <View style={{ backgroundColor: "white", flex:1, marginTop:50 }}>
                 <Text style={{ alignSelf: "center", fontSize: 20 }}>
                     Cambiar idioma
                 </Text>
 
-                <View style ={{justifyContent:"center", alignItems:"center"}}>
+                <View style={{ justifyContent: "center", alignItems: "center" }}>
                     <Text>Idioma origen</Text>
-                    <View style ={{borderWidth:1, borderColor:"black", paddingHorizontal:30, paddingVertical:5, borderRadius:10}}>
-                        <Text>Español</Text>
-                    </View>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            setIsOpen(true)
+                            setSource(true)
+                        }}
+                        style={{ borderWidth: 1, borderColor: "black", paddingHorizontal: 30, paddingVertical: 5, borderRadius: 10 }}>
+                        <Text>{sourceLanguage}</Text>
+                    </TouchableOpacity>
+
                     <Text>Idioma destino</Text>
-                    <View style ={{borderWidth:1, borderColor:"black", paddingHorizontal:30, paddingVertical:5, borderRadius:10}}>
-                        <Text>Ingles</Text>
-                    </View>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            setIsOpen(true)
+                            setTarget(true)
+                        }}
+                        style={{ borderWidth: 1, borderColor: "black", paddingHorizontal: 30, paddingVertical: 5, borderRadius: 10 }}>
+                        <Text>{targetLanguage}</Text>
+                    </TouchableOpacity>
+
                 </View>
 
-                <Text style={{marginTop:40, textAlign:"center"}}>No se otras configuraciones aqui raras</Text>
             </View>
 
-            <Languages></Languages>
+            <Languages isOpen={isOpen} setIsOpen={setIsOpen} setSourceLanguage={setSourceLanguage} setTargetLanguage={setTargetLanguage} source={source} target={target} setSource={setSource} setTarget={setTarget}></Languages>
         </ScrollView>
     )
 }
