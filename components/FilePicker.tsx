@@ -66,7 +66,6 @@ const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
     })
 
     const result = await pruebaa.json()
-    console.log(result)
     setText(result.texto)
 
     if (result.texto) {
@@ -109,7 +108,7 @@ const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
         }} style={styles.button}>
           <Text style={{ color: 'white', textAlign:"center" }}>Elige un archivo</Text>
         </TouchableOpacity>
-        <Text style={{ alignSelf: "center" }}>El formato del archivo debe de ser compatible</Text>
+        <Text style={{ alignSelf: "center" }}>El formato del archivo debe de ser compatible.</Text>
       </View>
     </>
   )

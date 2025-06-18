@@ -18,7 +18,6 @@ const UserPage = ({ setNavigation }: any) => {
         const fetchUser = () =>{
             const session = supabase.auth.session()
             setSession(session)
-            console.log(session)
         }
 
         fetchUser()

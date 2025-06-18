@@ -1,4 +1,4 @@
-const HtmlContent = (txt: string, words: string, html: string) => {
+const HtmlContent = (html: string) => {
     return (
         `
     <html>

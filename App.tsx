@@ -13,7 +13,7 @@ import UserPage from './components/UserPage'
 import RegistrationSuccess from './components/registrationSuccess'
 
 export default function App() {
-  const [navigation, setNavigation] = useState("Welcome")
+  const [navigation, setNavigation] = useState("Files")
   const webviewRef = useRef(null)
   const [selectedText, setSelectedText] = useState('')
   const [finalSelection, setFinalSelection] = useState('')
@@ -22,6 +22,7 @@ export default function App() {
   const [words, setWords] = useState<string[]>([])
   const [html, setHtml] = useState('<span>hola</span>')
   const [text, setText] = useState('')
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useTimeout(() => {
     const aaa = selectedText.replace(/[\n\r]+/g, ' ')
@@ -78,7 +79,7 @@ export default function App() {
       {navigation === "Files" && <Files
         setNavigation={setNavigation} setText={setText} setIsLoading={setIsLoading}
         setTranslatedText={setTranslatedText}
-        finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setHtml={setHtml} navigation={navigation}></Files>}
+        finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setHtml={setHtml} navigation={navigation} isLoaded={isLoaded} setIsLoaded={setIsLoaded}></Files>}
 
       {navigation === "UserPage" && <UserPage setNavigation={setNavigation}></UserPage>}
       {navigation === "RegistrationSuccess" && <RegistrationSuccess setNavigation={setNavigation}></RegistrationSuccess>}

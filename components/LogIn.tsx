@@ -12,6 +12,14 @@ export default function LogIn({ setNavigation }: any) {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
+    useEffect(() => {
+        const session = supabase.auth.session()
+        if (!session) {
+        } else {
+            setNavigation('Files')
+        }
+      }, [])
+
     const handleLogIn = async () => {
         if (!email) {
             setError('No pusiste email')

@@ -7,21 +7,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import FilePicker from "./FilePicker"
 import Words from "./Words"
 
-const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalSelection, selectedText, setHtml, setWords, navigation, words }: any) => {
+
+const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalSelection, selectedText, setHtml, setWords, navigation, words, isLoaded, setIsLoaded }: any) => {
+
 
     const [Files, setFiles] = useState<any[]>([])
     const [isLoggin, setIsLoggin] = useState(false)
     const [userId, setUserId] = useState('')
     useEffect(() => {
+
+        if(!isLoaded) return
+
         const session = supabase.auth.session()
         if (!session) {
             setIsLoggin(false)
+            setNavigation('Welcome')
         } else {
             setIsLoggin(true)
             const id = session.user?.id
             setUserId(id || '')
             fetchData(id || '')
         }
+
+    }, [isLoaded])
+
+    
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoaded(true)
+        }, 1000)
+
+        return () => clearTimeout(timer)
     }, [])
 
     const fetchData = async (id: string) => {
@@ -57,7 +74,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
             body: JSON.stringify({ url }),
         })
         const result = await response.json()
-        
+
         setText(result.texto)
         result && setIsLoading(false)
     }
@@ -86,7 +103,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
                 setText={setText} setIsLoading={setIsLoading} finalSelection={finalSelection} selectedText={selectedText} setWords={setWords} words={words} setNavigation={setNavigation} setHtml={setHtml} navigation={navigation}
             ></FilePicker>
 
-            {isLoggin && <Words userId ={userId}></Words>}
+            {isLoggin && <Words userId={userId}></Words>}
         </>
     )
 }

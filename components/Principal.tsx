@@ -15,6 +15,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   const [userId, setUserId] = useState('')
 
   useEffect(() => {
+    setIsLoading(true)
     const session = supabase.auth.session()
     if (!session) {
     } else {
@@ -35,7 +36,8 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
   useEffect(() => {
     const phrases = text.split(' ')
     const spans = phrases.map((w: any) => {
-      return `<span class = "${words.some((word: any) => word.split(' ').includes(w)) ? "color" : ""}">${w}</span>`
+      return `<span class="${words.some((word: any) => word.split(' ').includes(w.replace(/[.,!?;:()"\[\]]/g, ''))) ? 'color' : ''}">${w}</span>`
+
     }).join('')
     setHtml(spans)
   }, [text, words])
@@ -43,6 +45,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
 
 
   const fetchData = async (id: string) => {
+    setIsLoading(true)
     const { data, error } = await supabase.from('words').select('*').eq('user_id', id)
     if (error) {
       console.error('Error:', error)
@@ -50,6 +53,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
       setWords(data.map((w) => {
         return w.word
       }))
+      setIsLoading(false)
     }
   }
 
@@ -124,7 +128,7 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
         <WebView
           ref={webviewRef}
           originWhitelist={['*']}
-          source={{ html: HtmlContent(isLoading ? "Cargando..." : text, JSON.stringify(words), isLoading ? "Cargando..." : html) }}
+          source={{ html: HtmlContent(isLoading ? "Cargando..." : html) }}
           onMessage={handleMessage}
         />
       </View>}
