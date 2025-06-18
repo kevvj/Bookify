@@ -45,7 +45,6 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
 
 
   const fetchData = async (id: string) => {
-    setIsLoading(true)
     const { data, error } = await supabase.from('words').select('*').eq('user_id', id)
     if (error) {
       console.error('Error:', error)
