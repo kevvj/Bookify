@@ -53,7 +53,6 @@ export default function TextSelector({ setNavigation, webviewRef, selectedText, 
       setWords(data.map((w) => {
         return w.word
       }))
-      setIsLoading(false)
     }
   }
 

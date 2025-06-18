@@ -105,6 +105,7 @@ const FilePicker = ({ setText, setIsLoading, setNavigation }: any) => {
         <TouchableOpacity onPress={() => {
           setNavigation('Home')
           pickFile()
+          setIsLoading(true)
         }} style={styles.button}>
           <Text style={{ color: 'white', textAlign:"center" }}>Elige un archivo</Text>
         </TouchableOpacity>

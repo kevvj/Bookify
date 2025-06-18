@@ -67,7 +67,7 @@ export default function App() {
 
       if (activo) {
         setNavigation('Welcome')
-        console.log('quepasa')
+        console.log(activo)
         AsyncStorage.setItem('new', JSON.stringify(false))
       }
 

@@ -91,6 +91,7 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: "black", width: 240 }} onPress={() => {
                             handleFile(item.name)
                             setNavigation('Home')
+                            setIsLoading(true)
                         }}>{item.name}</Text>
                         <FontAwesomeIcon icon={faFilePdf}></FontAwesomeIcon>
                     </View>

@@ -47,7 +47,7 @@ const Header = ({ Traslate, setNavigation }: any) => {
                     if (isLoggedIn) {
                         setNavigation("UserPage")
                     }else{
-                        setNavigation('Login')
+                        setNavigation('Welcome')
                     }
                 }}>
                     <FontAwesomeIcon icon={faUserCircle}></FontAwesomeIcon>

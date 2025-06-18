@@ -16,7 +16,7 @@ export default function LogIn({ setNavigation }: any) {
         const session = supabase.auth.session()
         if (!session) {
         } else {
-            setNavigation('Files')
+            setNavigation('UserPage')
         }
       }, [])
 
@@ -88,7 +88,7 @@ export default function LogIn({ setNavigation }: any) {
             </View>
 
             <TouchableOpacity
-                onPress={() => { setNavigation('Files') }} style={{ position: "absolute", top: 200, right: 40 }} ><FontAwesomeIcon icon={faX}></FontAwesomeIcon></TouchableOpacity>
+                onPress={() => { setNavigation('Welcome') }} style={{ position: "absolute", top: 200, right: 40 }} ><FontAwesomeIcon icon={faX}></FontAwesomeIcon></TouchableOpacity>
         </View>
     )
 }
