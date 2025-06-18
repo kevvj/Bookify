@@ -21,7 +21,6 @@ const Files = ({ setNavigation, setText, setIsLoading, setTranslatedText, finalS
         const session = supabase.auth.session()
         if (!session) {
             setIsLoggin(false)
-            setNavigation('Welcome')
         } else {
             setIsLoggin(true)
             const id = session.user?.id

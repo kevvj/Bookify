@@ -46,6 +46,8 @@ export default function App() {
 
   }, [])
 
+
+
   useEffect(() => {
     const restore = async () => {
       const stored = await AsyncStorage.getItem('session')
@@ -56,8 +58,21 @@ export default function App() {
     }
 
     restore()
+
   }, [])
 
+  useEffect(() => {
+    AsyncStorage.getItem('new').then(data => {
+      const activo = data ? JSON.parse(data) : true
+
+      if (activo) {
+        setNavigation('Welcome')
+        console.log('quepasa')
+        AsyncStorage.setItem('new', JSON.stringify(false))
+      }
+
+    }).catch(e => console.log('Error AsyncStorage:', e))
+  }, [])
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
